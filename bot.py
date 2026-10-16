@@ -1,13 +1,24 @@
-import time
-from datetime import datetime
+def get_signal(candles):
+    if len(candles) < 2:
+        return "WAIT"
 
-def signal():
-    # Demo placeholder:
-    # Later we can connect a legitimate market-data source.
-    print("EUR/USD | 1M | WAIT")
+    red = candles[-2]
+    green = candles[-1]
 
-print("Pocket Option Demo Signal Bot Started")
+    if (
+        red["close"] < red["open"]
+        and green["close"] > green["open"]
+        and green["close"] > red["high"]
+    ):
+        return "BUY / UP"
 
-while True:
-    signal()
-    time.sleep(60)
+    return "WAIT"
+
+
+if __name__ == "__main__":
+    candles = [
+        {"open": 1.1050, "high": 1.1060, "close": 1.1040},
+        {"open": 1.1040, "high": 1.1070, "close": 1.1065},
+    ]
+
+    print(get_signal(candles))
