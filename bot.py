@@ -5,10 +5,7 @@ def get_signal(candles):
     first = candles[-2]
     second = candles[-1]
 
-    # BUY:
-    # First candle RED
-    # Second candle GREEN
-    # Green candle closes above red candle high
+    # BUY: red candle followed by green breakout
     if (
         first["close"] < first["open"]
         and second["close"] > second["open"]
@@ -16,10 +13,7 @@ def get_signal(candles):
     ):
         return "BUY / UP"
 
-    # SELL:
-    # First candle GREEN
-    # Second candle RED
-    # Red candle closes below green candle low
+    # SELL: green candle followed by red breakdown
     if (
         first["close"] > first["open"]
         and second["close"] < second["open"]
@@ -28,3 +22,9 @@ def get_signal(candles):
         return "SELL / DOWN"
 
     return "WAIT"
+
+
+if __name__ == "__main__":
+    print("EUR/USD demo signal bot ready.")
+    print("This file contains signal logic only.")
+    print("No trades will be placed.")
