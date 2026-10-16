@@ -16,7 +16,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+env:
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
